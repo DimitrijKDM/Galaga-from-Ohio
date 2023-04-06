@@ -25,7 +25,7 @@
             y: 350,
             width: 70,
             height: 70,
-            src: "img/img/rocket2.png"
+            src: "img/rocket2.png"
         }
 
         let invaders = [];
@@ -78,7 +78,10 @@
                 && rocket.x < invader.x
                 && rocket.y < invader.y
                 ) {
-                    rocket.img.src = "img/img/boom1.jpg";
+                    rocket.img.src = "img/boom1.jpg";
+                    rocket.img.src = "img/boom2.PNG";
+                    rocket.img.src = "img/boom3.PNG";
+                    rocket.img.src = "img/boom4.PNG";
                     console.log("Collision!!!");
                     invaders = invaders.filter(u => u != invader);
                 }
@@ -91,7 +94,7 @@
                 y: -50,
                 width: 60,
                 height: 60,
-                src: "img/img/invader.png",
+                src: "img/invader.png",
                 img: new Image()
             }
             invader.img.src = invader.src;
@@ -113,7 +116,7 @@
         }
 
         function loadImages(){
-            backgroundImage.src = "img/img/space.png"
+            backgroundImage.src = "img/space.png"
             rocket.img = new Image();
             rocket.img.src = rocket.src;
         }
