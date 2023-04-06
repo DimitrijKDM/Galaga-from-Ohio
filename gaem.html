@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaga aus Ohio</title>
+
+    <style>
+        canvas {
+            background-color: black;
+        }
+    </style>
+
+    <script>
+        let KEY_SPACE = false; // 32
+        let KEY_LEFT = false; // 37
+        let KEY_RIGHT = false; // 39
+        let canvas;
+        let ctx;
+        let backgroundImage = new Image();
+
+        let rocket = {
+            x: 325,
+            y: 350,
+            width: 70,
+            height: 70,
+            src: "img/img/rocket2.png"
+        }
+
+        let invaders = [];
+
+        document.onkeydown = function(e) {
+            if (e.keyCode == 32) { // Leertaste gedrückt
+                KEY_SPACE = true;
+            }
+
+            if (e.keyCode == 37) { // Nach oben gedrückt
+                KEY_LEFT = true;
+            }
+
+            if (e.keyCode == 39) { // Nach unten gedrückt
+                KEY_RIGHT = true;
+            }
+        }
+
+
+        document.onkeyup = function(e) {
+            if (e.keyCode == 32) { // Leertaste losgelassen
+                KEY_SPACE = false;
+            }
+
+
+            if (e.keyCode == 37) { // Nach oben losgelassen
+                KEY_LEFT = false;
+            }
+
+            if (e.keyCode == 39) { // Nach unten losgelassen
+                KEY_RIGHT = false;
+            }
+        }
+
+        function startGame(){
+            canvas = document.getElementById("canvas");
+            ctx = canvas.getContext("2d");
+            loadImages();
+            setInterval(update, 1000 / 144);
+            setInterval(createInvaders, 5000);
+            setInterval(checkCollision, 1000 / 144);
+            draw();
+            // calculate
+        }
+
+        function checkCollision(){
+            invaders.forEach(function(invader){
+                if (rocket.x + rocket.width > invader.x 
+                && rocket.y + rocket.height > invader.y
+                && rocket.x < invader.x
+                && rocket.y < invader.y
+                ) {
+                    rocket.img.src = "img/img/boom1.jpg";
+                    console.log("Collision!!!");
+                    invaders = invaders.filter(u => u != invader);
+                }
+            });
+        }
+
+        function createInvaders(){
+            let invader = {
+                x: 200,
+                y: -50,
+                width: 60,
+                height: 60,
+                src: "img/img/invader.png",
+                img: new Image()
+            }
+            invader.img.src = invader.src;
+            invaders.push(invader);
+        }
+
+        function update() {
+            if (KEY_LEFT) {
+                rocket.x -= 3;
+            }
+
+            if (KEY_RIGHT) {
+                rocket.x += 3;
+            }
+
+            invaders.forEach(function(invader){
+                invader.y += 2;
+            });
+        }
+
+        function loadImages(){
+            backgroundImage.src = "img/img/space.png"
+            rocket.img = new Image();
+            rocket.img.src = rocket.src;
+        }
+
+        function draw() {
+            ctx.drawImage(backgroundImage, 0, 0);
+            ctx.drawImage(rocket.img, rocket.x, rocket.y, rocket.width, rocket.height);
+            invaders.forEach(function(invader) {
+                ctx.drawImage(invader.img, invader.x, invader.y, invader.width, invader.height);
+            });
+            requestAnimationFrame(draw)
+        }
+    </script>
+</head>
+<body onload="startGame()">
+    <canvas id="canvas" width = "720" height = "480"></canvas>
+    
+</body>
+</html>
