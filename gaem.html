@@ -65,7 +65,7 @@
             ctx = canvas.getContext("2d");
             loadImages();
             setInterval(update, 1000 / 144);
-            setInterval(createInvaders, 5000);
+            setInterval(createInvaders, 3000);
             setInterval(checkCollision, 1000 / 144);
             draw();
             // calculate
@@ -78,10 +78,16 @@
                 && rocket.x < invader.x
                 && rocket.y < invader.y
                 ) {
-                    rocket.img.src = "img/boom1.jpg";
-                    rocket.img.src = "img/boom2.PNG";
-                    rocket.img.src = "img/boom3.PNG";
-                    rocket.img.src = "img/boom4.PNG";
+                    rocket.img.src = "img/boom.PNG";
+                    setTimeout(function(){
+                        rocket.img.src = "img/boom2.PNG";
+                        setTimeout(function(){
+                             rocket.img.src = "img/boom3.PNG";
+                             setTimeout(function(){
+                                rocket.img.src = "img/boom4.PNG";
+                    }, 250);
+                    }, 250);
+                    }, 250);
                     console.log("Collision!!!");
                     invaders = invaders.filter(u => u != invader);
                 }
