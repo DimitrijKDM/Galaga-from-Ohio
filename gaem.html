@@ -69,10 +69,18 @@
             setInterval(update, 1000 / 144);
             setInterval(createInvaders, 3000);
             setInterval(checkCollision, 1000 / 144);
-            setInterval(checkIfCollisionHappened, 1000 / 144);
+            setInterval(CollisionHappened, 1000 / 144);
             setInterval(checkForShot, 1000 / 144);
             draw();
         }
+
+        function CollisionHappened(){
+            if (!collisionHappened) {
+                ctx.drawImage(gameOverImg, 0, 0); 
+            }
+        }
+
+        // todo: Display Game Over Image when Collision happened
 
         function checkCollision(){
             invaders.forEach(function(invader){
@@ -81,6 +89,7 @@
                 && rocket.x < invader.x
                 && rocket.y < invader.y
                 ) {
+                    let collisionHappened = true;
                     rocket.img.src = "img/boom.PNG";
                     setTimeout(function(){
                         rocket.img.src = "img/boom2.PNG";
@@ -92,7 +101,6 @@
                     }, 250);
                     }, 250);
                     console.log("Collision!!!");
-                    let collisionHappened = true;
                     invaders = invaders.filter(u => u != invader); 
                     setTimeout(function(){
                         location.reload();
@@ -182,7 +190,6 @@
             shots.forEach(function(shot){
                 ctx.drawImage(shot.img, shot.x, shot.y, shot.width, shot.height);
             });
-            ctx.drawImage(gameOverImg, 0, 0);
         }
     </script>
 </head>
