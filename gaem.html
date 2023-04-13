@@ -91,6 +91,9 @@
                     }, 250);
                     console.log("Collision!!!");
                     invaders = invaders.filter(u => u != invader);
+                    setTimeout(function(){
+                        location.reload();
+                    }, 1000);
                 }
                 shots.forEach(function(shot){
                     if (shot.x + shot.width > invader.x &&
