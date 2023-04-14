@@ -14,17 +14,17 @@ let xSpeed = 0;
 let collisionHappened = false;
 let delayBetweenShots = 50;
 let currentDelayBetweenShots = 0;
-let soundStart = new Audio("audio/lets get this party started.wav")
-let soundShoot = new Audio("audio/pew.wav")
-let soundExplosionInvader = new Audio("audio/explosion1.wav")
-let soundExplosionShip = new Audio("audio/boom.m4a")
+let soundStart = new Audio("../assets/audio/lets get this party started.wav")
+let soundShoot = new Audio("../assets/audio/pew.wav")
+let soundExplosionInvader = new Audio("../assets/audio/explosion1.wav")
+let soundExplosionShip = new Audio("../assets/audio/boom.m4a")
 
 let rocket = {
     x: 325,
     y: 350,
     width: 55,
     height: 55,
-    src: "img/rocket2.png"
+    src: "../assets/img/rocket2.png"
 }
 
 let invaders = [];
@@ -64,7 +64,7 @@ function prepareGame() {
         // Draw the scaled image onto the canvas with any excess image area cropped off
         ctx.drawImage(backgroundImage, 0, 0, backgroundImage.width, backgroundImage.height, x, y, scaledWidth, scaledHeight);
     };
-    backgroundImage.src = "img/start_game.png";
+    backgroundImage.src = "../assets/img/start_game.png";
 }
 
 document.addEventListener('click', playGame);
@@ -136,13 +136,13 @@ function checkCollision() {
     invaders.forEach(function(invader) {
         if (hitTest(rocket, invader)) {
             collisionHappened = true;
-            rocket.img.src = "img/boom.PNG";
+            rocket.img.src = "../assets/img/boom.PNG";
             setTimeout(function() {
-                rocket.img.src = "img/boom2.PNG";
+                rocket.img.src = "../assets/img/boom2.PNG";
                 setTimeout(function() {
-                     rocket.img.src = "img/boom3.PNG";
+                     rocket.img.src = "../assets/img/boom3.PNG";
                      setTimeout(function(){
-                        rocket.img.src = "img/boom4.PNG";
+                        rocket.img.src = "../assets/img/boom4.PNG";
                     }, 250);
                 }, 250);
             }, 250);
@@ -181,7 +181,7 @@ function createInvaders(){
         y: -50,
         width: 60,
         height: 60,
-        src: "img/invader.png",
+        src: "../assets/img/invader.png",
         img: new Image()
     }
     invader.img.src = invader.src;
@@ -196,7 +196,7 @@ function checkForShot(){
                 y: rocket.y - 20,
                 width: 10,
                 height: 100,
-                src: "img/shot.png",
+                src: "../assets/img/shot.png",
                 img: new Image()
             };
             shot.img.src = shot.src;
@@ -267,10 +267,10 @@ function update() {
 }
 
 function loadImages(){
-    backgroundImage.src = "img/space.png"
+    backgroundImage.src = "../assets/img/space.png"
     rocket.img = new Image();
     rocket.img.src = rocket.src;
-    gameOverImg.src = "img/game over.png"
+    gameOverImg.src = "../assets/img/game over.png"
 }
 
 function draw() {
