@@ -1,12 +1,16 @@
 let KEY_SPACE = false; // 32
 let KEY_LEFT = false; // 37
 let KEY_RIGHT = false; // 39
+let MAX_SPEED = 3;
+let ACCELERATION = 0.25;
+
 let canvas;
 let ctx;
 let backgroundImage = new Image();
 let gameOverImg = new Image();
 let worldWidth;
 let worldHeight;
+let xSpeed = 0;
 let collisionHappened = false;
 let delayBetweenShots = 50;
 let currentDelayBetweenShots = 0;
@@ -226,15 +230,21 @@ function hitTest(object1, object2) {
 
 function update() {
     if (!collisionHappened) {
+        if (KEY_LEFT || KEY_RIGHT) {
+            xSpeed = Math.min(xSpeed + ACCELERATION, MAX_SPEED);
+        } else {
+            xSpeed = Math.max(xSpeed - ACCELERATION, 0);
+        }
+
         if (KEY_LEFT) {
-            rocket.x -= 3;
+            rocket.x -= xSpeed;
             if (rocket.x < 0) {
                 rocket.x = 0;
             }
         }
 
         if (KEY_RIGHT) {
-            rocket.x += 3;
+            rocket.x += xSpeed;
             if (rocket.x > worldWidth - rocket.width) {
                 rocket.x = worldWidth - rocket.width;
             }
