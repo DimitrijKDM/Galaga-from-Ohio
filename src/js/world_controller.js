@@ -74,7 +74,7 @@ function playGame() {
     soundStart.volume = 0.2;
     soundStart.play();
 
-    var bgMusic = new Audio('audio/ducktales moon theme.mp3');
+    var bgMusic = new Audio('../assets/audio/ducktales moon theme.mp3');
     bgMusic.play();
     bgMusic.loop = true;
     bgMusic.volume = 0.2;
