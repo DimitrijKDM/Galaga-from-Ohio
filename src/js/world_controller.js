@@ -112,8 +112,6 @@ document.onkeyup = function(e) {
 
 
 function startGame(){
-    canvas = document.getElementById("canvas");
-    ctx = canvas.getContext("2d");
     loadImages();
     setInterval(update, 1000 / 144);
     setInterval(createInvaders, 3000);
