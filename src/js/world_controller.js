@@ -6,7 +6,6 @@ let ACCELERATION = 0.25;
 
 let canvas;
 let ctx;
-let backgroundImage = new Image();
 let gameOverImg = new Image();
 let worldWidth;
 let worldHeight;
