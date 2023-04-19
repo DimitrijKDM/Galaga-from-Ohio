@@ -127,8 +127,6 @@ function CollisionHappened(){
     }
 }
 
-// todo: Display Game Over Image when Collision happened
-
 function checkCollision() {
     invaders.forEach(function(invader) {
         if (hitTest(rocket, invader)) {
